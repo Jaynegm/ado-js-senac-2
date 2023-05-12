@@ -10,6 +10,8 @@ h1.testefw-titulo {
     font-weight: bold;
     font-size: 2em;
     text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0;
 }
 
 address.testefw-versao {
