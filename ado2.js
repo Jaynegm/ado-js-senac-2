@@ -208,14 +208,18 @@ class AlunoMatricula {
  * aparecer. Essa caixinha deve ser assim:
  *
  * <li>
- *     <label for="XXX">Nota:</label>
- *     <input type="text" id="XXX" />
- *     <label for="YYY">Peso:</label>
- *     <input type="text" id="YYY" />
+ *     <div>
+ *         <label for="XXX">Nota:</label>
+ *         <input type="text" id="XXX" />
+ *     </div>
+ *     <div>
+ *         <label for="YYY">Peso:</label>
+ *         <input type="text" id="YYY" />
+ *     </div>
  * </li>
  *
  * Onde XXX e YYY devem ser IDs que não existem em nenhum outro lugar da página.
- * Coloque esse <li> dentro do <ul> que está dentro da <div> com a classe ex10e11 no ado2.html.
+ * Coloque esse <li> dentro do <ul> que está dentro da <div> com a classe ex11e13 no ado2.html.
  */
 function criarItemNota() {
     naoFizIssoAinda();
