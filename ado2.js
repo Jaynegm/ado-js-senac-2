@@ -48,19 +48,29 @@ class Nota {
      * @param {number} peso O peso da nota, entre 0 a 10, na composição total da nota semestral.
      */
     #verificar(valor, peso) {
-        naoFizIssoAinda();
-    }
+        if (!Number.isFinite(valor) || !Number.isFinite(peso)){
+		   throw new TypeError("A nota e o peso devem ser numéricos.");
+		   }
+		if (valor < 0 || valor > 10 || peso < 0 || peso > 10){
+			throw new RangeError("A nota e o peso devem ser um número entre 0 e 10.");
+		}
+	}
 
     // EXERCÍCIO 2.
     // Crie os métodos getters necessários de todos os parâmetros recebidos no construtor aqui.
-
+        get valor() {
+            return this.#valor;
+        }
+        get peso() {
+            return this.#peso;
+        }
     // EXERCÍCIO 3.
     /**
      * Retorna o valor ponderado desta nota. Ou seja, a nota numa escala de 0 a peso.
      * @returns {number} O valor ponderado desta nota.
      */
     get notaPonderada() {
-        naoFizIssoAinda();
+       return (this.#valor * this.#peso / 10);
     }
 
     // EXERCÍCIO 4.
@@ -71,7 +81,7 @@ class Nota {
      * @returns {String} A representação string deste objeto.
      */
     toString() {
-        naoFizIssoAinda();
+         return ("nota = " + this.#valor +  ", " +"peso = " + this.#peso );
     }
 }
 
@@ -120,7 +130,11 @@ class AlunoMatricula {
      * @throw RangeError Se o valor de qualquer parâmetro não for aceitável.
      */
     constructor(nome, genero, disciplina, ados, presenca) {
-        naoFizIssoAinda();
+        this.#nome = nome;
+        this.#genero = genero;
+        this.#disciplina = disciplina;
+        this.#ados = ados;
+        this.#presenca = presenca;
     }
 
     // EXERCÍCIO 6.
