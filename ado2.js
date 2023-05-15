@@ -6,7 +6,7 @@
  * @return {string[]} Os nomes dos alunos que fizeram este exercício.
  */
 function nomesDosAlunos() {
-    return [ "João da Silva", "Maria da Silva" ];
+return [ "Marina Barboza", "Jayne Lopes Gama", "Alicia Patricia", "Kamille Vitoria" ];
 }
 
 /**
@@ -130,12 +130,9 @@ class AlunoMatricula {
      * @throw RangeError Se o valor de qualquer parâmetro não for aceitável.
      */
     constructor(nome, genero, disciplina, ados, presenca) {
-        this.#nome = nome;
-        this.#genero = genero;
-        this.#disciplina = disciplina;
-        this.#ados = ados;
-        this.#presenca = presenca;
-    }
+    
+}
+
 
     // EXERCÍCIO 6.
     // Crie os métodos getters necessários de todos os parâmetros recebidos no construtor aqui.
@@ -322,3 +319,37 @@ function verificarAlunoMatriculado() {
 // * area
 // * circunferencia
 // Se o raio recebido no construtor não for um número, lance um TypeError. Se for negativo, lance RangeError.
+        class Circulo {
+            #raio;
+        
+            constructor(raio) {
+            if (typeof raio !== 'number') {
+            throw new TypeError('O raio deve ser um número');
+            }
+            if (raio < 0) {
+            throw new RangeError('O raio não pode ser negativo');
+            }
+            this.#raio = raio;
+        }
+
+        get raio() {
+            return this.#raio;
+        }
+
+        get diametro() {
+            return this.#raio * 2;
+        }
+
+        get area() {
+            return Math.PI * Math.pow(this.#raio, 2);
+        }
+
+        get circunferencia() {
+            return 2 * Math.PI * this.#raio;
+        }
+        }
+        const circulo = new Circulo(5);
+        console.log(circulo.raio); // 5
+        console.log(circulo.diametro); // 10
+        console.log(circulo.area); // 78.53981633974483
+        console.log(circulo.circunferencia); // 31.41592653589793
