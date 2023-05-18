@@ -95,7 +95,11 @@ class Nota {
  * A presença é um inteiro entre 0 e 100 representando a porcentagem de comparecimento às aulas.
  */
 class AlunoMatricula {
-
+    #nome;
+    #disciplina;
+    #ados;
+    #presenca;
+    #genero;
     // EXERCÍCIO 5.
     /**
      * Considerando a descrição da classe como dada acima, implemente o construtor dela.
@@ -130,13 +134,62 @@ class AlunoMatricula {
      * @throw RangeError Se o valor de qualquer parâmetro não for aceitável.
      */
     constructor(nome, genero, disciplina, ados, presenca) {
-    
-}
-
+     if (typeof nome !== 'string'){
+        throw new TypeError ('nome inválido'+nome);
+     }
+     if(nome.trim().length === 0){
+        throw new RangeError ('nome inválido'+nome);
+     }
+     if (typeof genero !== 'string') {
+        throw new TypeError ('genero inválido'+genero);
+     }
+     if (!['M','F'].includes(genero)){
+        throw new RangeError ('genero inválido'+genero);
+     }
+     if (typeof disciplina !== 'string') {
+        throw new TypeError ('disciplina inválida'+disciplina);
+     }
+     if (disciplina.trim().length === 0){
+        throw new RangeError ('disciplina inválida'+disciplina);
+     }
+     if (!Array.isArray (ados) || ados.some(nota => ! (nota instanceof Nota))) {
+        throw new TypeError ('ADOs feitas por aluno');
+     }
+     if (ados.reduce((total,nota) => total + nota.peso,0) !== 10) {
+        throw new RangeError ('O peso das notas deve ser 10')
+     }
+     if (!Number.isFinite(presenca)){
+        throw new TypeError ('valor inválido');
+     }
+     if (presenca < 0 || presenca > 100){
+        throw new RangeError ('valor inválido');
+     }
+     this.#nome = nome;
+     this.#genero = genero;
+     this.#disciplina = disciplina;
+     this.#presenca = presenca;
+     this.#ados = ados;
+    }
 
     // EXERCÍCIO 6.
     // Crie os métodos getters necessários de todos os parâmetros recebidos no construtor aqui.
-
+    get nome() {
+       return this.#nome;
+    }
+        get genero() {
+        return this.#genero;
+    }
+         get disciplina() {
+         return this.#disciplina;
+    }
+        get ados() {
+        return this.#ados;
+    }
+         get presenca() {
+        return this.#presenca;
+    }
+        
+        
     // EXERCÍCIO 7.
     /**
      * Este método calcula a nota final do(a) aluno(a) na disciplina.
@@ -145,8 +198,21 @@ class AlunoMatricula {
      * @returns {number} A média final do(a) aluno(a) na disciplina.
      */
     get media() {
-        naoFizIssoAinda();
-    }
+        let somaNotasPonderadas = 0;
+        let somaPesos = 0;
+      
+        for (const nota of this.#ados) {
+          somaNotasPonderadas += nota.valor * nota.peso/10;
+          somaPesos += nota.peso;
+        }
+      
+        if (somaPesos !== 10) {
+            throw new RangeError('A soma dos pesos das notas deve ser igual a 10');
+        }
+      
+        return somaNotasPonderadas;
+      }
+      
 
     // EXERCÍCIO 8.
     /**
