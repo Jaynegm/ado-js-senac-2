@@ -229,7 +229,20 @@ class AlunoMatricula {
      * @returns {String} A situação final do(a) aluno(a) na disciplina.
      */
     get situacao() {
-        naoFizIssoAinda();
+        const media = this.media;
+        const presenca = this.presenca;
+        if (media < 7 && presenca < 75){
+            return "RMF"; //reprovado por media e falta
+        }
+        if(media < 7){
+            return "RM"; //reprovado por media
+        } 
+        if(presenca < 75){
+            return "RF"; //reprovado por falta
+        } 
+        if (media >= 7 && presenca >= 75){
+            return "AP"; //aprovado
+        }
     }
 
     // EXERCÍCIO 9.
@@ -248,8 +261,22 @@ class AlunoMatricula {
      * @returns {String} A situação final do(a) aluno(a) na disciplina, escrito por extenso.
      */
     get situacaoPorExtenso() {
-        naoFizIssoAinda();
+        const media = this.media;
+        const presenca = this.presenca;
+        const genero = this.genero;
+       if (media < 7 && presenca < 75){
+        return genero === "F" ? "reprovada por média e falta" : "reprovado por média e falta";// Reprovado por média e falta
+       }
+       if (media <7){
+        return genero === "F" ? "reprovada por média" : "reprovado por média"; // Reprovado por média
+       }
+       if (presenca < 75){
+        return genero === "F" ? "reprovada por falta" : "reprovado por falta";// Reprovado por falta
     }
+    if (media >= 7 && presenca >=75){
+        return genero === "F" ? "aprovada":"aprovado";//Aprovação
+    }
+}
 
     // EXERCÍCIO 10.
     /**
@@ -275,9 +302,17 @@ class AlunoMatricula {
      * @returns {String} O status descritivo do(a) aluno(a).
      */
     get status() {
-        naoFizIssoAinda();
-    }
-}
+        const nome = this.nome;
+        const disciplina = this.disciplina;
+        const situacao = this.situacao;
+        const presenca = this.presenca;
+        const media = this.media
+        const situacaoPorExtenso = this.situacaoPorExtenso
+  
+        return (nome + " tem média " + media + " na disciplina de " + disciplina + " e foi " + situacaoPorExtenso + " com " + presenca + "% de presença" + ".");
+      }
+  }
+  
 
 // EXERCÍCIO 11.
 /**
