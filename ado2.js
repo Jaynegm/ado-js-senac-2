@@ -231,6 +231,7 @@ class AlunoMatricula {
     get situacao() {
         const media = this.media;
         const presenca = this.presenca;
+<<<<<<< Updated upstream
         if (media < 7 && presenca < 75){
             return "RMF"; //reprovado por media e falta
         }
@@ -243,6 +244,20 @@ class AlunoMatricula {
         if (media >= 7 && presenca >= 75){
             return "AP"; //aprovado
         }
+=======
+       if (media < 7 && presenca < 75){
+        return "RMF"; // Reprovado por média e falta
+       }
+       if (media <7){
+        return "RM"; // Reprovado por média
+       }
+       if (presenca < 75){
+        return "RF"; // Reprovado por falta
+       }
+       if (media >= 7 && presenca >=75){
+        return "AP"; // Aprovado
+       }
+>>>>>>> Stashed changes
     }
 
     // EXERCÍCIO 9.
@@ -252,7 +267,7 @@ class AlunoMatricula {
      * Ou seja:
      * - Deve retornar "aprovado" ou "aprovada" ao invés de "AP".
      * - Deve retornar "reprovado por média" ou "reprovada por média" ao invés de "RM".
-     * - Deve retornar "reprovado por falta" ou "reprovada por falta" ao invés de "RF".
+    * - Deve retornar "reprovado por falta" ou "reprovada por falta" ao invés de "RF".
      * - Deve retornar "reprovado por média e falta" ou "reprovada por média e falta" ao invés de "RMF".
      *
      * Dica: Use o getter situacao definido no exercício 8 e use também o gênero do(a) aluno(a) para decidir o que
@@ -277,6 +292,10 @@ class AlunoMatricula {
         return genero === "F" ? "aprovada":"aprovado";//Aprovação
     }
 }
+<<<<<<< Updated upstream
+=======
+    
+>>>>>>> Stashed changes
 
     // EXERCÍCIO 10.
     /**
@@ -301,6 +320,7 @@ class AlunoMatricula {
      *
      * @returns {String} O status descritivo do(a) aluno(a).
      */
+<<<<<<< Updated upstream
     get status() {
         const nome = this.nome;
         const disciplina = this.disciplina;
@@ -313,6 +333,16 @@ class AlunoMatricula {
       }
   }
   
+=======
+    get status () {
+       const c1 = (this.aluno + this.genero + this.disciplina + this.nota);
+       const s1 = c1.status;
+
+    }
+  
+    
+
+>>>>>>> Stashed changes
 
 // EXERCÍCIO 11.
 /**
@@ -333,17 +363,17 @@ class AlunoMatricula {
  * Onde XXX e YYY devem ser IDs que não existem em nenhum outro lugar da página.
  * Coloque esse <li> dentro do <ul> que está dentro da <div> com a classe ex11e13 no ado2.html.
  */
-function criarItemNota() {
-    naoFizIssoAinda();
-}
+ //criarItemNota() {
+    //naoFizIssoAinda();function
+//}
 
 // EXERCÍCIO 12.
 /**
  * No formulário, ao clicar no botão "Remover nota", o último <li> criado no exercício 11 deve ser removido.
  * Se não houver mais nenhum <li> a ser removido, nada deve ser feito.
  */
-function removerItemNota() {
-    naoFizIssoAinda();
+//function removerItemNota() {
+    //naoFizIssoAinda();
 }
 
 // EXERCÍCIO 13.
