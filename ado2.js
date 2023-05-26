@@ -231,20 +231,6 @@ class AlunoMatricula {
     get situacao() {
         const media = this.media;
         const presenca = this.presenca;
-<<<<<<< Updated upstream
-        if (media < 7 && presenca < 75){
-            return "RMF"; //reprovado por media e falta
-        }
-        if(media < 7){
-            return "RM"; //reprovado por media
-        } 
-        if(presenca < 75){
-            return "RF"; //reprovado por falta
-        } 
-        if (media >= 7 && presenca >= 75){
-            return "AP"; //aprovado
-        }
-=======
        if (media < 7 && presenca < 75){
         return "RMF"; // Reprovado por média e falta
        }
@@ -257,7 +243,6 @@ class AlunoMatricula {
        if (media >= 7 && presenca >=75){
         return "AP"; // Aprovado
        }
->>>>>>> Stashed changes
     }
 
     // EXERCÍCIO 9.
@@ -292,10 +277,7 @@ class AlunoMatricula {
         return genero === "F" ? "aprovada":"aprovado";//Aprovação
     }
 }
-<<<<<<< Updated upstream
-=======
     
->>>>>>> Stashed changes
 
     // EXERCÍCIO 10.
     /**
@@ -320,7 +302,6 @@ class AlunoMatricula {
      *
      * @returns {String} O status descritivo do(a) aluno(a).
      */
-<<<<<<< Updated upstream
     get status() {
         const nome = this.nome;
         const disciplina = this.disciplina;
@@ -331,18 +312,9 @@ class AlunoMatricula {
   
         return (nome + " tem média " + media + " na disciplina de " + disciplina + " e foi " + situacaoPorExtenso + " com " + presenca + "% de presença" + ".");
       }
-  }
-  
-=======
-    get status () {
-       const c1 = (this.aluno + this.genero + this.disciplina + this.nota);
-       const s1 = c1.status;
-
     }
-  
     
 
->>>>>>> Stashed changes
 
 // EXERCÍCIO 11.
 /**
@@ -363,17 +335,38 @@ class AlunoMatricula {
  * Onde XXX e YYY devem ser IDs que não existem em nenhum outro lugar da página.
  * Coloque esse <li> dentro do <ul> que está dentro da <div> com a classe ex11e13 no ado2.html.
  */
- //criarItemNota() {
-    //naoFizIssoAinda();function
-//}
+function criarItemNota() {
+    const ul = document.querySelector('.ex11a13 ul');
+    const pesoId = `peso-${ul.children.length + 1}`;
+    const notaId = `nota-${ul.children.length + 1}`;
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+    <div>
+     <label for = "${notaId}">Nota:</label>
+     <input type= "text" id= "${notaId}">
+    </div>
+    <div>
+    <label for = "${pesoId}">Peso:</label>
+    <input type= "text" id= "${pesoId}">
+   </div>
+     `;
+     ul.appendChild(li);
+}
 
 // EXERCÍCIO 12.
 /**
  * No formulário, ao clicar no botão "Remover nota", o último <li> criado no exercício 11 deve ser removido.
  * Se não houver mais nenhum <li> a ser removido, nada deve ser feito.
  */
-//function removerItemNota() {
-    //naoFizIssoAinda();
+function removerItemNota() {
+    const ul = document.querySelector('.ex11a13 ul');
+
+    if (ul.children.length > 0)
+    {
+        const lastLi = ul.children[ul.children.length - 1];
+        ul.removeChild(lastLi);
+    }
 }
 
 // EXERCÍCIO 13.
@@ -423,25 +416,28 @@ function verificarAlunoMatriculado() {
     let texto;
     try {
         const nome = lerTexto("o nome do(a) aluno(a)", document.querySelector("#nome").value);
-        const escolheuEle = naoFizIssoAinda();
-        const escolheuEla = naoFizIssoAinda();
+        const escolheuEle = document.querySelector("#ele").checked;
+        const escolheuEla = document.querySelector("#ela").checked;
         if (!escolheuEle && !escolheuEla) throw new Error("Escolha o gênero do(a) aluno(a) corretamente.");
         const genero = escolheuEle ? "M" : "F";
-        const disciplina = naoFizIssoAinda();
+        const disciplina = lerTexto("o nome da disciplina", document.querySelector("#disciplina").value);
         const ados = [];
-        for (const item of document.querySelectorAll(naoFizIssoAinda())) {
-            const nota = lerNota(naoFizIssoAinda());
-            const peso = lerPeso(naoFizIssoAinda());
-            ados.push(new Nota(naoFizIssoAinda()));
+        let somaPesos = 0;
+        
+        for (const item of document.querySelectorAll(".ex11a13 > ul > li")) {
+            const nota = lerNota(item.querySelectorAll("input")[0].value);
+            const peso = lerPeso(item.querySelectorAll("input")[1].value);
+            ados.push(new Nota(nota,peso));
+            somaPesos += peso;
         }
-        const presenca = lerPresenca(naoFizIssoAinda());
-        texto = new AlunoMatricula(naoFizIssoAinda()).status;
+        if (somaPesos != 10) throw new Error("O peso das notas deve somar 10.");
+        const presenca = lerPresenca(document.querySelector("#presenca").value);
+        const matricula = new AlunoMatricula(nome, genero, disciplina,ados, presenca);texto = matricula.status;
     } catch (e) {
-        texto = naoFizIssoAinda();
+        texto = e.message;
     }
-    document.querySelector("#situacao").innerHTML = naoFizIssoAinda();
+    document.querySelector("#situacao").value = texto;
 }
-
 // EXERCÍCIO 14.
 //
 // Crie uma classe Circulo onde o construtor recebe o raio e que tenha os seguintes getters:
@@ -450,37 +446,32 @@ function verificarAlunoMatriculado() {
 // * area
 // * circunferencia
 // Se o raio recebido no construtor não for um número, lance um TypeError. Se for negativo, lance RangeError.
-        class Circulo {
-            #raio;
-        
-            constructor(raio) {
-            if (typeof raio !== 'number') {
-            throw new TypeError('O raio deve ser um número');
-            }
-            if (raio < 0) {
-            throw new RangeError('O raio não pode ser negativo');
-            }
-            this.#raio = raio;
-        }
+class Circulo {
+    #raio;
+     
+     constructor(raio) {
+     if (!Number.isFinite(raio)) {
+     throw new TypeError('O raio deve ser um número');
+     }
+     if (raio < 0) {
+     throw new RangeError('O raio não pode ser negativo');
+     }
+     this.#raio = raio;
+ }
 
-        get raio() {
-            return this.#raio;
-        }
+ get raio() {
+     return this.#raio;
+ }
 
-        get diametro() {
-            return this.#raio * 2;
-        }
+ get diametro() {
+     return this.#raio * 2;
+ }
 
-        get area() {
-            return Math.PI * Math.pow(this.#raio, 2);
-        }
+ get area() {
+     return Math.PI * this.#raio**2;
+ }
 
-        get circunferencia() {
-            return 2 * Math.PI * this.#raio;
-        }
-        }
-        const circulo = new Circulo(5);
-        console.log(circulo.raio); // 5
-        console.log(circulo.diametro); // 10
-        console.log(circulo.area); // 78.53981633974483
-        console.log(circulo.circunferencia); // 31.41592653589793
+ get circunferencia() {
+     return 2 * Math.PI * this.#raio;
+ }
+ }
